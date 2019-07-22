@@ -3,6 +3,9 @@ package com.jancloud.cursomc.model;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
@@ -10,9 +13,11 @@ import javax.persistence.ManyToOne;
 public class Cidade implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
-	private Integer id;
-	private Integer nome;
 	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Integer id;
+	private String nome;
 	@ManyToOne
 	@JoinColumn(name="estado_id")
 	private Estado estado;
@@ -25,11 +30,16 @@ public class Cidade implements Serializable{
 
 
 
-	public Cidade(Integer id, Integer nome) {
+	public Cidade(Integer id, String nome, Estado estado) {
 		super();
 		this.id = id;
 		this.nome = nome;
+		this.estado = estado;
 	}
+
+
+
+
 
 
 
@@ -45,13 +55,13 @@ public class Cidade implements Serializable{
 
 
 
-	public Integer getNome() {
+	public String getNome() {
 		return nome;
 	}
 
 
 
-	public void setNome(Integer nome) {
+	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
